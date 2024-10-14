@@ -1,0 +1,11 @@
+"use strict";
+let vteste;
+vteste = 'Jardson';
+vteste = 10;
+let cursos = ['C++', 'JavaScript', 'TypeScript'];
+let valores = [10, 100, 2024];
+cursos.push('Arduino');
+valores.push(500);
+console.log(cursos);
+console.log(valores);
+console.log(vteste);
