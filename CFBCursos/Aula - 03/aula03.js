@@ -1,8 +1,8 @@
 "use strict";
-let nome; // Declarando o tipo da variável
+let nome;
 nome = 'Jardson';
 nome = 'Alan';
-let valor; // int, float, bin, hex
+let valor;
 valor = 10.5;
 console.log(valor);
 console.log(nome);
