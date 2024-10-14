@@ -1,7 +1,7 @@
-const nome = 'Jardson';
-const canal = 'YouTube';
-const curso = 'TypeScript';
+const vnome = 'Jardson';
+const vcanal = 'YouTube';
+const vcurso = 'TypeScript';
 
-console.log(nome);
-console.log(canal);
-console.log(curso);
+console.log(vnome);
+console.log(vcanal);
+console.log(vcurso);
