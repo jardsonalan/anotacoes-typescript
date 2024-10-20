@@ -1,6 +1,6 @@
 // Parâmetros REST com SPREAD
 
-function soma(...n:number[]):number {
+function csoma(...n:number[]):number {
     let s:number = 0;
     for (let el of n) {
         s+=el;
@@ -11,4 +11,4 @@ function soma(...n:number[]):number {
     return s;
 };
 
-console.log(soma(10, 20, 30, 40, 100));
+console.log(csoma(10, 20, 30, 40, 100));
