@@ -11,11 +11,27 @@ class Computador {
         this.ligado = false;
     }
     ;
+    info() {
+        console.log(`Nome: ${this.nome}`);
+        console.log(`RAM: ${this.ram}`);
+        console.log(`CPU: ${this.cpu}`);
+        console.log(`Ligado: ${this.ligado ? 'Sim' : 'Não'}`);
+        console.log('------------------------');
+    }
+    ;
+    ligar() {
+        return this.ligado = true;
+    }
+    ;
+    desligar() {
+        return this.ligado = false;
+    }
+    ;
 }
 ;
 let computador1 = new Computador('Rapidão', 64, 10);
 let computador2 = new Computador('Carão', 32, 5);
 let computador3 = new Computador('Gamer', 128, 10);
-console.log(computador1.nome, computador1.ram, computador1.cpu, computador1.ligado);
-console.log(computador2.nome, computador2.ram, computador2.cpu, computador2.ligado);
-console.log(computador3.nome, computador3.ram, computador3.cpu, computador3.ligado);
+computador1.info();
+computador2.info();
+computador3.info();
