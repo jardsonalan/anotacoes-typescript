@@ -12,6 +12,12 @@ class Conta {
         return gerar;
     }
     ;
+    info() {
+        console.log(`Titular: ${this.titular}`);
+        console.log(`Numéro: ${this.numero}`);
+        console.log('-------------------------------');
+    }
+    ;
 }
 ;
 class ContaPF extends Conta {
@@ -19,6 +25,7 @@ class ContaPF extends Conta {
     constructor(titular, cpf) {
         super(titular);
         this.cpf = cpf;
+        console.log(`Conta PF criada - Nome: ${titular}`);
     }
     ;
 }
@@ -28,11 +35,10 @@ class ContaPJ extends Conta {
     constructor(titular, cnpj) {
         super(titular);
         this.cnpj = cnpj;
+        console.log(`Conta PJ criada - Nome: ${titular}`);
     }
     ;
 }
 ;
 let titular1 = new ContaPF('Jardson', 111);
 let titular2 = new ContaPJ('Alan', 222333);
-console.log(titular1.titular, titular1.numero);
-console.log(titular2.titular, titular2.numero);
