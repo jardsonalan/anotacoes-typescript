@@ -1,10 +1,16 @@
+// public: acessado de qualquer lugar
+// private: acessado somente na sua própria classe
+// protected: acessado somente na sua própria classe e nas classes filhas
+
 class Conta {
     protected numero:number; // pode ser acessado pelas classes filhas
     protected titular:string;
+    private saldo:number;
     // Método construtor
     constructor(titular:string){
         this.numero = this.gerarNumeroConta(); // recebe o número gerado pela função (gerarNumeroConta)
         this.titular = titular;
+        this.saldo = 0;
     };
 
     private gerarNumeroConta():number{
@@ -15,7 +21,23 @@ class Conta {
     protected info():void{
         console.log(`Titular: ${this.titular}`);
         console.log(`Numéro: ${this.numero}`);
-        console.log('-------------------------------');
+    };
+
+    public verificarSaldo():number{
+        return this.saldo;
+    };
+
+    protected depositar(valor:number):number{
+        let deposito = this.saldo += valor;
+        return deposito;
+    };
+
+    protected sacar(valor:number):void{
+        if (valor <= this.saldo) {
+            this.saldo -= valor;
+        } else {
+            console.log(`Saldo insuficiente.`);
+        }
     };
 };
 
@@ -25,7 +47,22 @@ class ContaPF extends Conta {
     constructor(titular:string, cpf:number){
         super(titular); // sempre se refere a classe pai
         this.cpf = cpf;
-        console.log(`Conta PF criada - Nome: ${titular}`);
+    };
+
+    info():void{
+        console.log(`Tipo da Conta: Pessoa Física`);
+        super.info();
+        console.log(`CPF: ${this.cpf}`);
+        console.log(`Saldo: R$${this.verificarSaldo()}`);
+        console.log('-------------------------------');
+    };
+
+    public deposito(valor: number):void {
+        if (valor > 1000) {
+            console.log('Valor de depósito muito grande para este tipo de conta.');
+        } else {
+            super.depositar(valor);
+        }
     };
 };
 
@@ -35,10 +72,35 @@ class ContaPJ extends Conta {
     constructor(titular:string, cnpj:number){
         super(titular);
         this.cnpj = cnpj;
-        console.log(`Conta PJ criada - Nome: ${titular}`);
+    };
+
+    info():void{
+        console.log(`Tipo da Conta: Pessoa Jurídica`);
+        super.info();
+        console.log(`CNPJ: ${this.cnpj}`);
+        console.log(`Saldo: R$${this.verificarSaldo()}`);
+        console.log('-------------------------------');
+    };
+
+    public deposito(valor: number):void {
+        if (valor > 10000) {
+            console.log('Valor de depósito muito grande para este tipo de conta.');
+        } else {
+            super.depositar(valor);
+        }
     };
 };
 
 // Objeto da classe
 let titular1 = new ContaPF('Jardson', 111);
 let titular2 = new ContaPJ('Alan', 222333);
+
+// Chamada da função (info)
+titular1.info();
+titular2.info();
+
+// Chamada da função (deposito)
+titular2.deposito(900);
+
+// Chamada da função (verificarSaldo)
+console.log(titular2.verificarSaldo());
