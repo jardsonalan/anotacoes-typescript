@@ -27,12 +27,20 @@ class Conta {
         return this.saldo;
     };
 
-    protected depositar(valor:number):number{
-        let deposito = this.saldo += valor;
-        return deposito;
+    protected depositar(valor:number):void{
+        if (valor < 0) {
+            console.log(`Valor inválido`);
+            return
+        } else {
+            this.saldo += valor;
+        }
     };
 
     protected sacar(valor:number):void{
+        if (valor < 0) {
+            console.log(`Valor inválido`);
+            return
+        }
         if (valor <= this.saldo) {
             this.saldo -= valor;
         } else {
@@ -64,6 +72,14 @@ class ContaPF extends Conta {
             super.depositar(valor);
         }
     };
+
+    public saque(valor:number):void{
+        if (valor > 1000) {
+            console.log('Valor de saque muito grande para este tipo de conta.');
+        } else {
+            super.sacar(valor);
+        }
+    };
 };
 
 // Classe Filha (Conta Pessoa Jurídica)
@@ -89,18 +105,28 @@ class ContaPJ extends Conta {
             super.depositar(valor);
         }
     };
+
+    public saque(valor:number):void{
+        if (valor > 10000) {
+            console.log('Valor de saque muito grande para este tipo de conta.');
+        } else {
+            super.sacar(valor);
+        }
+    };
 };
 
 // Objeto da classe
 let titular1 = new ContaPF('Jardson', 111);
 let titular2 = new ContaPJ('Alan', 222333);
 
+// Chamada da função (deposito)
+titular1.deposito(500);
+titular2.deposito(1000);
+
+// Chamada da função (saque)
+titular1.saque(100);
+titular2.saque(200);
+
 // Chamada da função (info)
 titular1.info();
 titular2.info();
-
-// Chamada da função (deposito)
-titular2.deposito(900);
-
-// Chamada da função (verificarSaldo)
-console.log(titular2.verificarSaldo());
