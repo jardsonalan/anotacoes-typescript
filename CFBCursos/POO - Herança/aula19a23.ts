@@ -2,8 +2,8 @@
 // private: acessado somente na sua própria classe
 // protected: acessado somente na sua própria classe e nas classes filhas
 
-class Conta {
-    protected numero:number; // pode ser acessado pelas classes filhas
+abstract class Conta { // Classe Abstrata: são classes que não podem ser instanciadas, apenas herdadas
+    private readonly numero:number; // não permite alterar o número da conta
     protected titular:string;
     private saldo:number;
     // Método construtor
