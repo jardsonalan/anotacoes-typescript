@@ -52,11 +52,17 @@ class Conta {
     ;
 }
 ;
+;
 class ContaPF extends Conta {
+    taxaCalculo = 10;
     cpf;
     constructor(titular, cpf) {
         super(titular);
         this.cpf = cpf;
+    }
+    ;
+    calcularTributo(valor) {
+        return valor * this.taxaCalculo;
     }
     ;
     info() {

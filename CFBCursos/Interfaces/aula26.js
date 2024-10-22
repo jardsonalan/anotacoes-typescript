@@ -1,5 +1,7 @@
 "use strict";
 ;
+;
+;
 let curso1;
 let curso2;
 curso1 = {
@@ -9,8 +11,8 @@ curso1 = {
     maxAlunos: 50
 };
 curso2 = {
-    titulo: 'JavaScript',
-    descricao: 'Curso de JavaScript',
+    titulo: 'Desenho',
+    descricao: 'Curso de Desenho',
     numeroAulas: 200,
     maxAlunos: 80
 };

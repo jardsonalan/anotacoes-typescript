@@ -53,12 +53,24 @@ abstract class Conta { // Classe Abstrata: são classes que não podem ser insta
     };
 };
 
+// Interface
+interface tributos {
+    taxaCalculo:number;
+    calcularTributo(valor:number):number;
+}; 
+
 // Classe Filha (Conta Pessoa Física)
-class ContaPF extends Conta {
+class ContaPF extends Conta implements tributos {
+    taxaCalculo = 10;
     private cpf:number;
     constructor(titular:string, cpf:number){
         super(titular); // sempre se refere a classe pai
         this.cpf = cpf;
+    };
+
+    // Função da interface (tributos)
+    calcularTributo(valor: number): number {
+        return valor * this.taxaCalculo;
     };
 
     info():void{
