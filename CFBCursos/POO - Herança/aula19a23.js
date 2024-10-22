@@ -19,8 +19,12 @@ class Conta {
         console.log(`Numéro: ${this.numero}`);
     }
     ;
-    verificarSaldo() {
+    get verificarSaldo() {
         return this.saldo;
+    }
+    ;
+    set saldoConta(saldo) {
+        this.saldo = saldo;
     }
     ;
     depositar(valor) {
@@ -59,7 +63,7 @@ class ContaPF extends Conta {
         console.log(`Tipo da Conta: Pessoa Física`);
         super.info();
         console.log(`CPF: ${this.cpf}`);
-        console.log(`Saldo: R$${this.verificarSaldo()}`);
+        console.log(`Saldo: R$${this.verificarSaldo}`);
         console.log('-------------------------------');
     }
     ;
@@ -94,7 +98,7 @@ class ContaPJ extends Conta {
         console.log(`Tipo da Conta: Pessoa Jurídica`);
         super.info();
         console.log(`CNPJ: ${this.cnpj}`);
-        console.log(`Saldo: R$${this.verificarSaldo()}`);
+        console.log(`Saldo: R$${this.verificarSaldo}`);
         console.log('-------------------------------');
     }
     ;

@@ -23,8 +23,12 @@ class Conta {
         console.log(`Numéro: ${this.numero}`);
     };
 
-    public verificarSaldo():number{
+    public get verificarSaldo():number{ // Getter: usado para obter algo da nossa classe, por exemplo, um valor de um parâmetro, de uma propriedade
         return this.saldo;
+    };
+
+    private set saldoConta(saldo:number){ // Setter: usado para setar um parâmetro, por exemplo, uma propriedade da nossa classe
+        this.saldo = saldo;
     };
 
     protected depositar(valor:number):void{
@@ -61,7 +65,7 @@ class ContaPF extends Conta {
         console.log(`Tipo da Conta: Pessoa Física`);
         super.info();
         console.log(`CPF: ${this.cpf}`);
-        console.log(`Saldo: R$${this.verificarSaldo()}`);
+        console.log(`Saldo: R$${this.verificarSaldo}`);
         console.log('-------------------------------');
     };
 
@@ -94,7 +98,7 @@ class ContaPJ extends Conta {
         console.log(`Tipo da Conta: Pessoa Jurídica`);
         super.info();
         console.log(`CNPJ: ${this.cnpj}`);
-        console.log(`Saldo: R$${this.verificarSaldo()}`);
+        console.log(`Saldo: R$${this.verificarSaldo}`);
         console.log('-------------------------------');
     };
 
