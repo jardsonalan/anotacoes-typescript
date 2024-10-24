@@ -1,4 +1,6 @@
-export class Pessoa {
+const Coisas:string[]=['Corda', 'Pilha', 'Lampada', 'Chave'];
+
+class Pessoa {
     public nome:string;
     public altura:number;
 
@@ -8,10 +10,16 @@ export class Pessoa {
     };
 };
 
-export class Objeto {
+class Objeto {
     public nome:string;
 
     constructor(nome:string){
         this.nome = nome;
     };
 };
+
+// Elemento padrão
+export default Pessoa;
+
+// Exportação
+export {Coisas, Objeto};
