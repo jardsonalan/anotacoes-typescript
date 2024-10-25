@@ -1,13 +1,13 @@
 // Namespace
 namespace Veiculos {
     // Utiliza o export para instânciar a classe fora do namespace
-    export class Carro {
+    export abstract class Carro {
         public nome:string;
         public motor:Motores.Motor;
 
         constructor(nome:string){
             this.nome = nome;
-            this.motor = new Motores.Motor(100);
+            this.motor = new Motores.Motor(3, 100);
         };
     };
 
@@ -16,23 +16,43 @@ namespace Veiculos {
 namespace Motores {
 
     class Turbo {
-        potencia:number;
+        private potencia:number;
 
         constructor(potencia:number){
             this.potencia = potencia;
+        };
+
+        // Método para retornar o valor da potência
+        public get pot(){
+            return this.potencia;
         };
     };
     // Utiliza o export para instânciar a classe fora do namespace
     export class Motor {
-        public potencia:number;
+        private ligado:boolean;
+        private cilindros:number;
+        private potencia:number;
 
-        constructor(potencia:number){
-            this.potencia = potencia;
+        constructor(cilindros:number, potencia:number, turbo?:Turbo){
+            this.potencia = potencia + (turbo ? turbo.pot : 0);
+            this.ligado = false;
+            this.cilindros = cilindros;
+        };
+
+        // Método para ligar o motor
+        public set liga(ligado:boolean){
+            this.ligado = ligado;
+        };
+
+        // Método para retornar se o motor está ligado ou desligado
+        public get liga(){
+            return this.ligado;
+        };
+
+        // Método para obter a potência do motor
+        public get potenciaMotor(){
+            return this.potencia;
         };
     };
 
 };
-
-const carro1 = new Veiculos.Carro('Ferrari');
-console.log(carro1.nome);
-console.log(carro1.motor.potencia);

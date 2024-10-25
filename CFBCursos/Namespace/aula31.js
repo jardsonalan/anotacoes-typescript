@@ -6,7 +6,7 @@ var Veiculos;
         motor;
         constructor(nome) {
             this.nome = nome;
-            this.motor = new Motores.Motor(100);
+            this.motor = new Motores.Motor(3, 100);
         }
         ;
     }
@@ -22,12 +22,32 @@ var Motores;
             this.potencia = potencia;
         }
         ;
+        get pot() {
+            return this.potencia;
+        }
+        ;
     }
     ;
     class Motor {
+        ligado;
+        cilindros;
         potencia;
-        constructor(potencia) {
-            this.potencia = potencia;
+        constructor(cilindros, potencia, turbo) {
+            this.potencia = potencia + (turbo ? turbo.pot : 0);
+            this.ligado = false;
+            this.cilindros = cilindros;
+        }
+        ;
+        set liga(ligado) {
+            this.ligado = ligado;
+        }
+        ;
+        get liga() {
+            return this.ligado;
+        }
+        ;
+        get potenciaMotor() {
+            return this.potencia;
         }
         ;
     }
@@ -35,6 +55,3 @@ var Motores;
     ;
 })(Motores || (Motores = {}));
 ;
-const carro1 = new Veiculos.Carro('Ferrari');
-console.log(carro1.nome);
-console.log(carro1.motor.potencia);
