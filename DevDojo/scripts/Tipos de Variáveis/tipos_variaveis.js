@@ -65,12 +65,12 @@ function concatenacao(valor1, valor2, valor3) {
     return valor1 + valor2;
 }
 console.log(`Concatenação: ${concatenacao('Quem é o ', 'cara')}`);
-// Cast: 
+// Casting:
 // - Diz ao compilador que sabemos oque estamos fazendo
-// - Força o dado
+// - Processo de substituir um tipo
 let variavel1 = 'sasa';
 let stringLength = variavel1.length;
-let stringUpperCase = variavel1.toUpperCase();
+let stringUpperCase = variavel1.toUpperCase(); // Caso o valor de variavel1 seja um número, não será possível converter para string
 console.log(stringLength);
 console.log(stringUpperCase);
 // Rest Parameter:

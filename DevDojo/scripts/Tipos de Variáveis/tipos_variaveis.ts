@@ -80,12 +80,12 @@ function concatenacao(valor1: any, valor2: any, valor3?: any): any{
 
 console.log(`Concatenação: ${concatenacao('Quem é o ', 'cara')}`);
 
-// Cast: 
+// Casting:
 // - Diz ao compilador que sabemos oque estamos fazendo
-// - Força o dado
+// - Processo de substituir um tipo
 let variavel1: any = 'sasa';
 let stringLength: number = (<string> variavel1).length;
-let stringUpperCase: string = (variavel1 as string).toUpperCase();
+let stringUpperCase: string = (variavel1 as string).toUpperCase(); // Caso o valor de variavel1 seja um número, não será possível converter para string
 
 console.log(stringLength);
 console.log(stringUpperCase);
