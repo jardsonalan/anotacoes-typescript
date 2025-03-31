@@ -1,6 +1,6 @@
 "use strict";
 // Interfaces
-// 
+// person: {name: string} - indica que independente do objeto que a função receber, ele tem que ter um name do tipo string
 function printName(person) {
     console.log(person.name);
 }
