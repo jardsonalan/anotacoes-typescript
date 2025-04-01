@@ -51,21 +51,53 @@ Este tópico irá apresentar alguns conceitos da linguagem TypeScript.
 
 ### Funções
 ---
+#### Declarando uma função:
 Declaramos funções da seguinte maneira:
 ```ts
 function nomeDaFuncao(): tipoDeRetorno {}
 ```
 - tipoDeRetorno: `string`, `number`, `boolean`, `void`, entre outros.
 
-    **Observação:** O tipo `void` não precisa retorna nenhum valor, ao contrário dos outros tipos.
+**Observação:** O tipo `void` não precisa retorna nenhum valor, ao contrário dos outros tipos.
 
-Podemos utilizar **paramêtros não obrigatórios** nas funções, para isso:
-- Basta colocar uma **interrogação (?)**, antes dos dois pontos (:), para definir que um parâmetro não é obrigatório:
-    
+#### Paramêtros não obrigatórios:
+Para criar um paramêtro não obrigatório, basta colocar uma **interrogação (?)**, antes dos dois pontos (:):
+```ts
+function nomeDaFuncao(parametro?: tipoDoParametro): tipoDeRetorno {}
+```
+- tipoDoParametro: `string`, `number`, `boolean`, `any`, entre outros.
+
+#### Definindo valor padrão em um paramêtro:
+Definimos um valor padrão em um paramêtro, colocando um **igual (=)** e em seguida, o **valor** que será utilizado, caso não seja passado nenhum valor na chamada da função:
+```ts
+function nomeDaFuncao(parametro: tipoDoParametro = valor): tipoDeRetorno {}
+```
+
+#### Função anônima:
+São funções que não tem nome, colocamos elas diretamente em variáveis.
+```ts
+const nomeDaVariavel = function(parametro: tipoDoParametro): tipoDeRetorno {}
+```
+
+**Observação:** Ao contrário das funções normais, as funções anônimas só podem ser instanciadas, ou chamadas, após a criação da função.
+
+#### Arrow Functions:
+Assim como as funções anônimas, as arrow functions só podem ser instanciadas, ou chamadas, após a criação da função.
+```ts
+const nomeDaFuncao = (parametro: tipoDoParametro) => {}
+```
+
+- Retornando objetos com Arrow Functions:
+
+    Caso deseje retornar um objeto utilizando Arrow Function, coloque as **chaves ({})** dentro de parênteses.
+
+    **Exemplo:**
     ```ts
-    function nomeDaFuncao(par1?: tipoDoParametro): tipoDeRetorno {}
+    const objectArrow = (name: string, surname: string) => ({
+        name: name,
+        surname: surname
+    })
     ```
-    - tipoDoParametro: `string`, `number`, `boolean`, `any`, entre outros.
 
 ### Operadores de comparação
 ---
@@ -259,6 +291,12 @@ class Funcionario extends Pessoa {
 
 **Observação:** Utilizamos o **super()** para indicar que queremos acessar e chamar atributos ou métodos da classe pai.
 
+#### Implementando interface em uma classe:
+Para implementar uma interface em uma classe utilizamos **implements**:
+```ts
+class nomeDaClasse implements nomeDaInterface {}
+```
+
 #### Maneiras de instanciar classes:
 ```ts
 // 1° Maneira:
@@ -290,3 +328,34 @@ let pessoa3: Pessoa = new Funcionario()
 | --- | --- |
 | get | Serve para retornar o valor de um atributo. |
 | set | Serve para modificar o valor de um atributo. |
+
+### Generics
+---
+Utilizamos generics quando não sabemos o tipo que iremos receber dentro de uma função, mas ainda queremos trabalhar diretamente com o tipo seguro de dados.
+
+Ou seja, o tipo que for definido na hora da chamada, será o tipo utilizado na execução.
+
+Podemos utilizar generics em:
+- Funções:
+    - Utilizando **function**:
+
+        ```ts
+        function nomeDaFuncao<Generics>(parametro): tipoDeRetorno {}
+        ```
+    - Utilizando **Arrow Function**:
+
+        ```ts
+        let nomeDaFuncao = <Generics>(parametro): tipoDeRetorno => {}
+        ```
+
+- Interfaces:
+
+    ```ts
+    interface nomeDaInterface <Generics> {}
+    ```
+
+- Classes:
+
+    ```ts
+    class nomeDaClasse <Generics> {}
+    ```
