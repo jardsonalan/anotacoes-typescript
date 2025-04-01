@@ -1,0 +1,292 @@
+# TypeScript - DevDojo
+Anotações do curso de typescript do DevDojo.
+
+## Instalação global
+1. Verifique se você tem o node instalado em sua máquina:
+    ```bash
+    node --version
+    ```
+    Caso não tenha, procure a documentação oficial do node e faça a instalação.
+
+2. Instale o typescript de forma global, executando o seguinte comando no terminal:
+    ```bash
+    npm install -g typescript
+    ```
+
+## Arquivo de configuração `ts-config`
+Para criar o arquivo de configuração, execute o seguinte comando no terminal:
+```bash
+npx tsc --init
+```
+
+Dentro desse arquivo, podemos fazer várias alterações para informar como queremos utilizar o typescript.
+
+## Compilação no modo `watch`
+O watch é uma funcionalidade que permite monitorar alterações em arquivos de um projeto e recompilar o código automaticamente.
+
+Execute o seguinte comando, dentro da pasta que se encontra o `ts.config`:
+```bash
+tsc -w
+```
+
+## Entendendo um pouco da linguagem
+Este tópico irá apresentar alguns conceitos da linguagem TypeScript.
+### Declarações de variáveis
+---
+| Tipos de declarações | Descrição |
+| --- | --- |
+| var | É tratado como variável global. |
+| let | É utilizada, apenas, dentro do local que está declarada. |
+| const | Não permite alterar os dados iniciais. |
+
+### Tipos de variáveis
+---
+| Tipos | Valores recebidos | Exemplos |
+| --- | --- | --- |
+| String | `string` | const varStr: string |
+| Number | `int`, `float` | const varNum: number |
+| Boolean | `true`, `false` | const varBool: boolean |
+| Void | `null`, `undefined` | const varVoid: void |
+| Any | Recebe todos os valores. | const varAny: any |
+
+### Funções
+---
+Declaramos funções da seguinte maneira:
+```ts
+function nomeDaFuncao(): tipoDeRetorno {}
+```
+- tipoDeRetorno: `string`, `number`, `boolean`, `void`, entre outros.
+
+    **Observação:** O tipo `void` não precisa retorna nenhum valor, ao contrário dos outros tipos.
+
+Podemos utilizar **paramêtros não obrigatórios** nas funções, para isso:
+- Basta colocar uma **interrogação (?)**, antes dos dois pontos (:), para definir que um parâmetro não é obrigatório:
+    
+    ```ts
+    function nomeDaFuncao(par1?: tipoDoParametro): tipoDeRetorno {}
+    ```
+    - tipoDoParametro: `string`, `number`, `boolean`, `any`, entre outros.
+
+### Operadores de comparação
+---
+| Operadores | Significado |
+| --- | --- |
+| == | Igual |
+| === | Igualdade restrita |
+| != | Diferente |
+| !== | Diferença restrita |
+| > | Maior que |
+| >= | Maior ou igual que |
+| < | Menor que |
+| <= | Menor ou igual que |
+
+### Arrays
+---
+Podemos declarar arrays da seguinte maneira:
+```ts
+const nomeDoArray: tipoDoArray[] = []
+```
+Ou, utilizando generics:
+```ts
+const nomeDoArray: Array<tipoDoArray> = []
+```
+- tipoDoArray: `string`, `number`, `boolean`, entre outros.
+
+### Tuplas
+---
+- Tem um tamanho pré-definido;
+- Permite trabalhar diretamente com o tipo dos objetos.
+```ts
+const nomeDaTupla: [tiposDosObjetos]
+```
+
+- tiposDosObjetos: `string`, `number`, `boolean`, entre outros.
+
+### Enum
+---
+- Permite trabalhar com os valores e posições dos elementos.
+
+```ts
+enum Dia{
+    SEGUNDA=1, 
+    TERCA,
+    QUARTA
+};
+
+// Pega o valor que está em SEGUNDA // Retorno: 1
+let dia: Dia = Dia.SEGUNDA;
+```
+
+**Observação:** Se um valor for atribuído a um elemento, como no elemento: **SEGUNDA**. Os próximos valores seguirão a sequência a partir dele.
+
+Exemplo: SEGUNDA=1, TERCA=2, QUARTA=3...
+
+Senão, a contagem irá começar a partir do 0.
+
+### Casting
+---
+- Processo de substituição de tipos;
+- Bastante utilizado em casos onde tipos incorretos são fornecidos por uma biblioteca.
+
+```ts
+let variavel1: any = 'sasa';
+
+// Primeira forma
+let stringLength: number = (<string> variavel1).length;
+
+// Segunda forma
+let stringLength: number = (variavel1 as string).length;
+```
+
+### Rest Parameter:
+---
+- Deve ser o último argumento de uma função;
+- Podemos passar vários valores, independente do tamanho;
+- Colocamos **três pontos (...)**, antes do parâmetro, para definir ele como rest parameter.
+
+```ts
+function adicao2(valor1: string, ...valor2: number[]): void{
+    let soma: number = 0;
+    for (let i = 0; i < valor2.length; i++) {
+        soma += valor2[i];
+    }
+    console.log(valor1+soma);
+}
+
+adicao2('A soma é: ', 1, 2, 4, 5);
+```
+
+### Interfaces
+---
+- A interface obriga a criar todos os atributos na criação do objeto.
+#### Estrutura de uma interface:
+```ts
+interface nomeDaInterface {
+    nomeDoAtributo: tipoDoAtributo;
+}
+```
+- tipoDoAtributo: `string`, `number`, `boolean`, entre outros.
+
+#### Extendendo uma interface:
+- Para extender uma interface é obrigatório utilizar o `extends`.
+
+```ts
+interface Pessoa {
+    nome: string;
+}
+
+// Interface Funcionario que herda os atributos passados na interface Pessoa
+interface Funcionario extends Pessoa {
+    salario: number;
+}
+```
+
+#### Criando um objeto a partir de uma interface:
+```ts
+// Objeto do tipo Pessoa
+let pessoa: Pessoa = {
+    nome: 'Alan'
+}
+
+// Objeto do tipo Funcionario
+let funcionario: Funcionario = {
+    nome: 'Jardson Alan',
+    salario: 2000
+}
+```
+
+#### Adicionando novo atributo a uma interface:
+- Para adicionar novos atributos em uma interface, basta apenas criá-la novamente com os novos atributos;
+- Podemos utilizar **atributos opcionais** em uma interface, basta colocar uma **interrogação (?)**.
+
+```ts
+interface Pessoa {
+    idade?: number;
+}
+```
+
+#### Utilizando o tipo da interface em uma função:
+```ts
+function nomeDaFuncao(nomeDoParametro: nomeDaInterface): tipoDaFuncao {}
+```
+- tipoDaFuncao: `string`, `number`, `boolean`, `void` entre outros.
+
+#### Definir um atributo que só pode ser modificado na criação do objeto:
+- Uma vez definido esse valor, não pode ser mais alterado;
+- Colocamos `readonly` antes do nome do atributo.
+```ts
+interface Gerente extends Funcionario {
+    readonly bonus: number;
+}
+```
+
+#### Observação:
+- Se estivermos trabalhando com variáveis, onde os valores não podem ser alterados, utilizamos: `const`;
+- Se estivermos trabalhando com atributos, interfaces ou classes, onde os valores não podem ser alterados, utilizamos: `readonly`.
+
+### Classes
+---
+#### Declarando uma classe e atributos:
+```ts
+class Pessoa {
+    nome: string
+    constructor(nome: string) {
+        this.nome = nome
+    }
+}
+```
+
+#### Criando métodos dentro de uma classe:
+```ts
+class Pessoa {
+    ...
+    print():void {}
+}
+```
+
+**Observação:** Os três pontos (...), no "Criando métodos dentro de uma classe", indica apenas continuação da parte que está em "Declarando uma classe e atributos"
+
+#### Herança:
+- Assim como nas interfaces, utilizamos o `extends` para indicar que uma classe herda de outra.
+
+```ts
+class Funcionario extends Pessoa {
+    constructor(nome: string) {
+        super(nome)
+    }
+}
+```
+
+**Observação:** Utilizamos o **super()** para indicar que queremos acessar e chamar atributos ou métodos da classe pai.
+
+#### Maneiras de instanciar classes:
+```ts
+// 1° Maneira:
+let pessoa1 = new Pessoa('Jardson')
+
+// 2° Maneira:
+let pessoa2 = {nome: 'string'} as Pessoa
+
+// 3° Maneira:
+let pessoa3 = <Pessoa>{}
+```
+
+**Observação:** A terceira maneira é utilizada quando queremos apenas ter acesso aos atributos e métodos. Porém, utilize apenas quando for realmente necessário.
+
+#### Polimorfismo:
+```ts
+let pessoa3: Pessoa = new Funcionario()
+```
+
+#### Modificadores de acesso:
+| Tipos | Descrição |
+| --- | --- |
+| public | Pode ser acessado em qualquer lugar da aplicação. |
+| protected | Só pode ser acessado pela classe pai ou filhas. |
+| private | Só pode ser acessado dentro da própria classe. |
+
+#### Métodos get e set:
+| Métodos | Descrição |
+| --- | --- |
+| get | Serve para retornar o valor de um atributo. |
+| set | Serve para modificar o valor de um atributo. |
