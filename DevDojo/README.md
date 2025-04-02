@@ -170,7 +170,7 @@ let stringLength: number = (<string> variavel1).length;
 let stringLength: number = (variavel1 as string).length;
 ```
 
-### Rest Parameter:
+### Rest Parameter
 ---
 - Deve ser o último argumento de uma função;
 - Podemos passar vários valores, independente do tamanho;
@@ -359,3 +359,56 @@ Podemos utilizar generics em:
     ```ts
     class nomeDaClasse <Generics> {}
     ```
+
+### Namespaces
+---
+- São módulos internos;
+- São uma forma de encapsular o código e deixar o código mais organizado;
+- Podemos colocar dentro de um namespace:
+    - Variáveis;
+    - Classes;
+    - Funções;
+    - Interfaces;
+    - Entre outros...
+
+#### Criando um namespace:
+```ts
+namespace nomeDoNamespace {
+    let nomeDaVariavel: tipoDaVariavel = valor
+    class nomeDaClasse {}
+    function nomeDaFuncao(): tipoDeRetorno {}
+    interface nomeDaInterface {}
+}
+```
+
+#### Exportando classes ou variáveis:
+Para exportar classes ou variáveis, basta colocar um **export** antes delas:
+```ts
+namespace nomeDoNamespace {
+   export let nomeDaVariavel: tipoDaVariavel = valor
+   export class nomeDaClasse {}
+}
+```
+
+#### Importando classes ou variáveis:
+Para importar a classe, ou variável, de outro arquivo, basta criar um **import** no arquivo que deseja importar:
+```ts
+import nomeQueDesejaUtilizarNoArquivo = nomeDoNamespace.nomeDaVariavelOuClasse
+```
+
+#### Colocando vários módulos em um único arquivo:
+Esse comando serve para evitar que vários scripts sejam utilizados no arquivo HTML:
+
+```bash
+tsc --outFile local/nomeDoArquivoQueDesejaCriar local/arquivosQueDesejaColocar
+```
+
+### Módulos externos
+---
+O módulo externo é um pedaço reutilizável de código, que encapsula os detalhes da implementação e expõe como se fosse uma API pública.
+
+Assim como os namespaces, os módulos externos podem ter tanto códigos, quanto declarações.
+
+Eles existem para especificar e carregar dependências através de múltiplos arquivos externos.
+
+**Observação:** Quando estamos utilizando módulos externos em um arquivo, ele irá se tornar módulo.
