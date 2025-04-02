@@ -1,0 +1,10 @@
+// Importando a classe
+/// <reference path="Validation.ts"/>
+/// <reference path="EmailValidator.ts"/>
+import EmailValidator = Validation.EmailValidator
+
+let emailExample = ['lalala@', 'lalala@lalala', 'lalala@email.com']
+
+emailExample.forEach(email => {
+    console.log(`${email} ${new EmailValidator().isValid(email)}`)
+})
