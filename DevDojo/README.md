@@ -412,3 +412,83 @@ Assim como os namespaces, os módulos externos podem ter tanto códigos, quanto 
 Eles existem para especificar e carregar dependências através de múltiplos arquivos externos.
 
 **Observação:** Quando estamos utilizando módulos externos em um arquivo, ele irá se tornar módulo.
+
+### Callback
+---
+É um estilo de programação funcional, aonde passamos uma função como um argumento de uma outra função.
+
+**Exemplo:**
+```ts
+function nomeDaFuncao(parametro: tipoDoParametro, funcaoCallback: (argumento: tipoDoArgumento) => tipoDeRetornoDoCallback): tipoDeRetorno {
+    // 1° Forma de chamar a função de callback:
+    callback.call(this, valorArgumento)
+
+    // 2° Forma de chamar a função de callback:
+    callback.apply(this, valorArgumento)
+    
+    // 3° Forma de chamar a função de callback:
+    callback(valorArgumento)
+}
+```
+
+### Eventos
+---
+- Ações para colocar algumas animações em elementos no front-end;
+- Eventos são divididos em duas partes:
+    
+    **Exemplo para explicar o Capturing e o Bubbling**
+    ```html
+    <div id="main">
+        <h1>Who is your favorite character?</h1>
+        <div id="parent">
+            <div id="chield1">
+                <button id="btn1">Jon Snow</button>
+            </div>
+            <div id="chield2">
+                <button id="btn2">Tyrion Lannister</button>
+            </div>
+        </div>
+    </div>
+    ```
+    **Observe a hierarquia:** main > parent > chield1 > ...
+
+    - **Capturing:**
+        
+        O capturing acontece quando estamos descendo essa hierarquia, ou seja, começando de cima para baixo.
+
+        ```ts
+        let main = document.getElementById('main')
+
+        main.addEventListener('click', ClickHandler.alertEventMain, true)
+        ```
+        O **true** indica para utilizar o capturing.
+
+    - **Bubbling:**
+
+        O bubbling acontece quando estamos subindo essa hierarquia, ou seja, começando de baixo para cima.
+
+        ```ts
+        let main = document.getElementById('main')
+
+        main.addEventListener('click', ClickHandler.alertEventMain, false)
+        ```
+        O **false** indica para utilizar o bubbling.
+
+### Encontrando elementos no DOM
+---
+| Tags | Descrição | Tipo de Retorno |
+| --- | --- | --- |
+| getElementById() | Pega um elemento específico através do seu ID(#). | HTMLElement |
+| querySelector() | Pega um elemento específico através do seu ID(#) ou class(.). | Element ou HTMLDivElement |
+| getElementsByTagName() | Pega um elemento específico através do nome da tag. | NodeListOf<HTMLDivElement> |
+| querySelectorAll() | Pega mais de um elemento com base no ID(#) ou class(.). | NodeList |
+| getElementsByName() | Pega um elemento específico através do seu name. | NodeList<HTMLElement> |
+
+### Alterando elementos no DOM
+---
+| Tags | Descrição |
+| --- | --- |
+| innerHTML | Cria uma nova tag no HTML. |
+| textContent | Adiciona um texto dentro da tag especificada. |
+| appendChild() | Adiciona uma nova tag na última posição dos elementos filhos. |
+| insertBefore() | Adiciona uma nova tag na primeira posição dos elementos filhos. |
