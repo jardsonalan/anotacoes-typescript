@@ -492,3 +492,105 @@ function nomeDaFuncao(parametro: tipoDoParametro, funcaoCallback: (argumento: ti
 | textContent | Adiciona um texto dentro da tag especificada. |
 | appendChild() | Adiciona uma nova tag na última posição dos elementos filhos. |
 | insertBefore() | Adiciona uma nova tag na primeira posição dos elementos filhos. |
+
+### Requisições GET e POST - Ajax
+---
+#### Status Code:
+| Código de status | Descrição |
+| --- | --- |
+| 0 | Quando não for inicilizado (Uninitialized). |
+| 1 | Feito set up, mas não enviado. |
+| 2 | Foi enviada (Sent). |
+| 3 | Está navegando pela rede (In flight). |
+| 4 | Foi completa (Complete). |
+
+### Storage
+---
+#### Session Storage:
+- Não tem expiração, ou seja, se não fecharmos a aba da aplicação, teremos uma sessão infinita;
+- Tamanho máximo que podemos utilizar: 5Mb's.
+
+##### Adicionando valores no Session Storage:
+```ts
+sessionStorage.setItem(key: string, value: string)
+```
+- key: Recebe uma chave para armazenar o valor;
+- value: Recebe o valor que será armazenado na chave informada.
+
+##### Pegando o valor das chaves no Session Storage:
+```ts
+console.log(sessionStorage.getItem(key))
+```
+
+##### Pegando o valor da chave armazenada no Session Storage, através de um loop:
+```ts
+for (let i = 0; i < sessionStorage.length; i++) {
+    let element = sessionStorage.getItem(<string>sessionStorage.key(i))
+    console.log(element)
+}
+```
+
+##### Limpando uma chave específica no Session Storage:
+```ts
+sessionStorage.removeItem(key)
+```
+
+##### Limpando todo o Session Storage:
+```ts
+sessionStorage.clear()
+```
+
+##### Resumo:
+| Funções | Descrição |
+| --- | --- |
+| setItem() | Serve para adicionar uma chave e um valor. |
+| getItem() | Serve para pegar o valor armazenado em uma chave específica. |
+| key() | Pega o nome de uma chave específica através do seu index. |
+| removeItem() | Serve para remover o valor de uma chave específica. |
+| clear() | Serve para limpar todo o Session Storage. |
+| length | Retorna o tamanho do Session Storage. |
+
+#### Local Storage:
+- É exatamente a mesma coisa que o Session Storage;
+- Tamanho máximo que podemos utilizar: 5Mb's;
+- A única diferença é que não tem limite na data de expiração, ou seja, se fecharmos a aba, a sessão não desaparece.
+
+##### Adicionando valores no Local Storage:
+```ts
+localStorage.setItem(key: string, value: string)
+```
+- key: Recebe uma chave para armazenar o valor;
+- value: Recebe o valor que será armazenado na chave informada.
+
+##### Pegando o valor das chaves no Local Storage:
+```ts
+console.log(localStorage.getItem(key))
+```
+
+##### Pegando o valor da chave armazenada no Local Storage, através de um loop:
+```ts
+for (let i = 0; i < localStorage.length; i++) {
+    let element = localStorage.getItem(<string>localStorage.key(i))
+    console.log(element)
+}
+```
+
+##### Limpando uma chave específica no Local Storage:
+```ts
+localStorage.removeItem(key)
+```
+
+##### Limpando todo o Local Storage:
+```ts
+localStorage.clear()
+```
+
+##### Resumo:
+| Funções | Descrição |
+| --- | --- |
+| setItem() | Serve para adicionar uma chave e um valor. |
+| getItem() | Serve para pegar o valor armazenado em uma chave específica. |
+| key() | Pega o nome de uma chave específica através do seu index. |
+| removeItem() | Serve para remover o valor de uma chave específica. |
+| clear() | Serve para limpar todo o Local Storage. |
+| length | Retorna o tamanho do Local Storage. |
