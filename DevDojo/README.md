@@ -594,3 +594,80 @@ localStorage.clear()
 | removeItem() | Serve para remover o valor de uma chave específica. |
 | clear() | Serve para limpar todo o Local Storage. |
 | length | Retorna o tamanho do Local Storage. |
+
+### Tratamento de Exceções
+---
+#### Exceções customizadas:
+Para criar uma exceção customizada, devemos criar uma classe que implementará a interface **Error**.
+
+**Exemplo:**
+```ts
+class ApplicationError implements Error {
+    name: string = 'ApplicationError'
+    
+    constructor(public message: string) {
+        if (typeof console !== undefined) {
+            console.log(`Error: ${message}`)
+        }
+    }
+
+    toString(): string {
+        return `${this.name} : ${this.message}`
+    }
+}
+```
+
+**Observação:** Essa classe servirá como classe pai para outras subclasses que terão um tratamento especifíco para cada situação.
+
+**Exemplo de uma classe filha de ApplicationError:**
+```ts
+class StringNotValidError extends ApplicationError {}
+```
+
+#### Lançando uma exceção customizada:
+A função abaixo, apresenta uma verificação para ver se o valor do parâmetro **input** é igual a undefined, ou vazio. Caso seja, lançará a exceção **StringNotValidError**.
+
+```ts
+function doSomethingWithString (input: string): string {
+    if (input === undefined || input === '') {
+        throw new StringNotValidError(`The string ${input} is not valid`)
+    }
+
+    return input
+}
+```
+
+**Observação:** Utilizamos o **throw new** para lançar exceções.
+
+#### Capturando exceções:
+- Para capturarmos uma exceção, utilizamos o **try** e o **catch**:
+
+    ```ts
+    try {
+        let input = doSomethingWithString('')
+    } catch (error) {
+        console.log(`No action`)
+    }
+    ```
+
+    **Observação:** No catch não podemos ter um tipo específico dentro dele, pois, irá gerar um erro de compilação.
+
+- Caso queira utilizar um tratamento específico, teremos que utilizar **if/else if/else**:
+    ```ts
+    try {
+        let input = doSomethingWithString('')
+    } catch (error) {
+        // Tratamento específico
+        if (error instanceof ApplicationError) {
+            console.log('No action inside if')
+            throw error // Lançando a exceção novamente
+        }
+        console.log(`No action`)
+    }
+    ```
+
+#### Quando utilizar typeof ou instanceof:
+| Operadores | Descrição |
+| --- | --- |
+| typeof | Utilizamos para os tipos simples. |
+| instanceof | Utilizamos para os tipos customizados. |
