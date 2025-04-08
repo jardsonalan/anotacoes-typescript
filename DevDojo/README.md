@@ -671,3 +671,187 @@ function doSomethingWithString (input: string): string {
 | --- | --- |
 | typeof | Utilizamos para os tipos simples. |
 | instanceof | Utilizamos para os tipos customizados. |
+
+### Destruction (Desestruturação)
+---
+É uma forma de extrair valores, para dentro de variáveis, de dados que estão guardados dentro de objetos e arrays.
+
+#### Desestruturação em objetos:
+```ts
+let person4 = {name: 'Jardson', lastname: 'Alan'}
+let {name: name2, lastname: lastname2} = person4
+```
+
+#### Desestruturação em arrays:
+```ts
+let array = ['DevDojo', 'Awesomeness']
+let [a, b] = array
+```
+
+#### Passando argumentos para funções utilizando desestruturação:
+```ts
+// Classe que será desestruturada
+class Person4 {
+    constructor (public name: string) {}
+}
+
+// Função que receberá o argumento através do destruction
+function example2 ({name}): void {
+    console.log(name)
+}
+
+// Argumento
+example2(new Person4('Jardson'))
+```
+
+### For loops
+---
+#### Forma básica:
+```ts
+let array2 = ['DevDojo', 'Awesomeness']
+for (let i = 0; i < array2.length; i++) {
+    console.log(array2[i])
+}
+```
+
+#### forEach:
+- Não podemos utilizar:
+    - break
+    - continue
+    - return
+
+```ts
+let array2 = ['DevDojo', 'Awesomeness']
+array2.forEach((name) => {
+    console.log(name)
+})
+```
+
+#### For utilizando o operador (in):
+- Em objetos:
+
+    O (in) é utilizado para navegar dentro das propriedades de determinado objeto.
+    ```ts
+    let person5 = {name: 'Jardson', lastname: 'Alan'}
+    for (let prop in person5) {
+        console.log(prop)
+    }
+    ```
+
+- Em arrays:
+    - Se utilizarmos o (in) em um array, a função irá retornar o index;
+    - O index retornado desse array é uma string.
+    ```ts
+    let array2 = ['DevDojo', 'Awesomeness']
+    for (let prop in array2) {
+        console.log(prop)
+    }
+    ```
+
+#### For utilizando o operador (of):
+O (of) é utilizado para retornar os valores que estão dentro de um array.
+```ts
+let array2 = ['DevDojo', 'Awesomeness']
+for (let prop of array2) {
+    console.log(prop)
+}
+```
+
+### Maps
+---
+#### Formas de criar um map:
+```ts
+// 1º Forma
+let nameAge = new Map<string, number>()
+nameAge.set('Gon', 14)
+nameAge.set('Killua', 14)
+
+// 2º Forma
+// Encadeamento de sets
+let nameAge2 = new Map<string, number>().set('Gon', 14).set('Killua', 14)
+
+// 3º Forma
+let animeEpisodes = new Map<string, number>([
+    ['DBZ', 200], ['FullMetal', 64]
+])
+```
+
+#### Métodos para trabalhar com maps:
+| Métodos | Descrição |
+| --- | --- |
+| get() | Serve para pegar um valor específico de uma determinada chave. |
+| set() | Serve para adicionar chaves e valores dentro de um map. |
+| has() | Verifica se existe determinada chave dentro de um map. |
+| delete() | Serve para deletar uma chave específica e o valor atribuído a ela. |
+| clear() | Serve para limpar um map. |
+| size | Serve para saber se existe algum valor dentro de um map. |
+| keys() | Utilizado para interar sobre as chaves de um map. |
+| values() | Utilizado para interar sobre os valores de um map. |
+| entries() | Utilizado para interar sobre as entradas de um map. |
+
+#### Interando sobre as chaves de um map:
+```ts
+for (let key of animeEpisodes.keys()) {
+    console.log(key)
+}
+```
+
+#### Interando sobre os valores de um map:
+```ts
+for (let value of animeEpisodes.values()) {
+    console.log(value)
+}
+```
+
+#### Interando sobre as entradas de um map:
+- Retorna em formato de array.
+
+```ts
+for (let entry of animeEpisodes.entries()) {
+    console.log(`${entry[0]} | ${entry[1]}`)
+}
+```
+
+#### Desestruturação de um map:
+```ts
+for (let [key, value] of animeEpisodes.entries()) {
+    console.log(`${key} | ${value}`)
+}
+```
+
+### Sets
+---
+#### Formas de criar um set:
+```ts
+// 1º Forma
+let nameSet = new Set<string>()
+nameSet.add('Jardson')
+
+// 2º Forma
+let nameSet2 = new Set<string>().add('Jardson').add('Alan')
+
+// 3º Forma
+let nameSet3 = new Set<string>(['Brenon', 'Sandy', 'DevDojo'])
+```
+
+#### Métodos para trabalhar com sets:
+| Métodos | Descrição |
+| --- | --- |
+| add() | Serve para adicionar valores dentro de um set. |
+| has() | Verifica se existe determinado elemento dentro de um set. |
+| delete() | Deleta um elemento específico dentro de um set. |
+| clear() | Serve para limpar o set. |
+| size | Retorna o tamanho de um set. |
+
+#### Formas de interar sobre os elementos de um set:
+```ts
+// 1º Forma
+for (let aux of nameSet2) {
+    console.log(aux)
+}
+
+// 2º Forma
+nameSet2.forEach((value) => {
+    console.log(value)
+})
+```
