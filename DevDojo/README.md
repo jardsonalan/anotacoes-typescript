@@ -855,3 +855,109 @@ nameSet2.forEach((value) => {
     console.log(value)
 })
 ```
+
+### Promises
+---
+As promessas são criadas passando uma função como parâmetro para o construtor Promise.
+
+#### Exemplos de Promises:
+```ts
+function openFile(): Promise<string> {
+    return new Promise((resolve, reject) => {
+        // Abrindo um arquivo
+        let isOpened: boolean = true
+        if (isOpened) {
+            resolve('Opened')
+        }
+        reject('Not Opened')
+    })
+}
+
+function readFile(): Promise<string> {
+    return new Promise((resolve, reject) => {
+        // Lendo um arquivo
+        let isOpened: boolean = true
+        if (isOpened) {
+            resolve('Read')
+        }
+        reject('Not Read')
+    })
+}
+
+function deleteFile(): Promise<string> {
+    return new Promise((resolve, reject) => {
+        // Deletando um arquivo
+        let isOpened: boolean = true
+        if (isOpened) {
+            resolve('Deleted')
+        }
+        reject('Not Deleted')
+    })
+}
+```
+
+#### Forma correta de encadeamento de Promises:
+```ts
+openFile()
+    .then(() => readFile()
+        .then(() => deleteFile()
+            .then(() => console.log('Everything OK'))
+            .catch((fromRejected) => console.log(fromRejected)))
+        .catch((fromRejected) => console.log(fromRejected)))
+    .catch((fromRejected) => console.log(fromRejected))
+```
+- **then:** sempre é executado quando não a erro na execução;
+- **catch:** é executado quando algum erro acontece.
+
+#### Utilizando o método (all):
+- Utilizamos o **all()** quando precisamos executar todas as promises ao mesmo tempo, ou seja, quando não dependem uma da outra.
+
+```ts
+Promise.all([openFile(), readFile(), deleteFile()]).then().catch()
+```
+
+#### Utilizando o método (race):
+- Utilizamos o método **race()** quando têm várias funções, porém, só queremos o resultado de uma delas;
+- Ou seja, executa todas ao mesmo tempo, porém, quando tivermos o resultado de uma, irá ter o retorno no then ou no catch.
+
+```ts
+Promise.race([openFile(), readFile(), deleteFile()]).then().catch()
+```
+
+### Decorators:
+---
+São funções que conseguimos adicionar meta-dados à classes ou algum tipo de propriedade, até mesmo outras funções. Onde eles estão relacionados.
+
+```ts
+@course
+class Person5 {
+    name: string
+}
+
+function course(target: any) {
+    Object.defineProperty(target.prototype, 'course', {value: () => 'TypeScript Aprendendo Junto: DevDojo'})
+}
+
+let person6 = new Person5()
+console.log(person6.course())
+```
+
+#### Passando parâmetros dentro de um Decorators:
+```ts
+@Course({
+    course: 'DevDojo Tutorials'
+})
+
+class Teacher {
+    name: string
+}
+
+function Course(config: any) {
+    return (target: any) => {
+        Object.defineProperty(target.prototype, 'course', {value: () => config.course})
+    }
+}
+
+let teacher = new Teacher()
+console.log(teacher.course())
+```
